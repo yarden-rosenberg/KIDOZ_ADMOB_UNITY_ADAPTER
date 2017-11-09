@@ -1,65 +1,54 @@
-<<<<<<< HEAD
-# KIDOZ_ADMOB_ADAPTER
-Kidoz AdMob mediation adapter
+
+# KIDOZ_ADMOB_UNITY_ADAPTER
+Kidoz AdMob mediation adapter for Unity
 </br>
 
 **Prerequisits:**
 * To use the Kidoz SDK adapter for AdMob you should make sure you have:
-1. AdMob Mediation integrated in your project.
+1. AdMob Unity Plugin integrated in your project, View the integration documentation [HERE](https://developers.google.com/admob/unity/start)
 2. A fully functional AdMob ad placement.
 3. Kidoz SDK built with your project.
 
-3.1. You can get Kidoz SDK as a Gradle dependency (together with it's needed dependencies) using the following lines:
+Note: supported for android only .
+
+3.1. You can download Kidoz Unity SDK plugin WITH Kidoz AdMob adapter. 
 ```
-    compile group: 'org.greenrobot', name: 'eventbus', version: '3.0.0'
-    compile 'com.android.support:support-v4:23.0.+'
-    compile 'com.kidoz.sdk:KidozSDK:0.8.2.1@aar'
+Download the KidozAdMobUnity.unitypackage and import it into your project  
+     
 ```
 3.2. Please make sure you have a set up Kidoz publisher account.
-3.3. The plugin itself consists of the java files inside the 'pluginFiles' directory, copy this entire package to your own project.
+3.3. The plugin itself consists of the Kidoz SDK and Kidoz AdMob adaptor. 
 
-3.4. Set your Kidoz PublisherId & PublisherToken in the adapter using the following:
-```
-KidozManager.setKidozPublisherId(<publisherId>)
-KidozManager.setKidozPublisherToken(<publisherToken>)
-
-Or set a Custom Events Parameter:
-
- For Banner:
- {"AppID":"publisherId", "Token":"publisherToken"}
-
- For Interstitial:
- {"AppID":"publisherId", "Token":"publisherToken"}
-
- For Rewarded Video:
- {"AppID":"publisherId", "Token":"publisherToken"}
- 
-```
-3.5. If you want to connect directly with the Kidoz reward events use the following:
-```
-KidozManager.setRewardedEvents(<new BaseInterstitial.IOnInterstitialRewardedEventListener>);
-```
 </br>
 
 **Integration Steps:**
 
-* Include the 'com.kidoz.mediation.admob.adapters' package in your project.
+* Import the KidozAdMobUnity.unitypackage  Assets --> Import Package --> Custom Package --> select  the KidozAdMobUnity.unitypackage package.
 
-* Define Kidoz Interstitial and/or Rewarded Video Custom events as explained [HERE](https://support.google.com/admob/answer/3083407):
+* Define Kidoz Banner , Interstitial and/or Rewarded Video Custom events as explained [HERE](https://support.google.com/admob/answer/3083407):
  
 ## KIDOZ Interstitial Adapter
 * Set the following full path in the `Class Name` field: </br>
-(Example: com.kidoz.mediation.admob.adapters.KidozAdMobMediationInterstitialAdapter.java)
+com.kidoz.mediation.admob.adapters.KidozAdMobMediationInterstitialAdapter
+
+* Set your publisherId and  publisherToken as the following in the `Parameter`field  :</br>
+{"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
+
 </br>
 ## KIDOZ Rewarded Video Adapter
 * Set the following full path in the `Class Name` field: </br>
-(Example: com.kidoz.mediation.admob.adapters.KidozAdMobMediationRewardedAdapter.java)
+com.kidoz.mediation.admob.adapters.KidozAdMobMediationRewardedAdapter
+
+* Set your publisherId and  publisherToken as the following in the `Parameter`field  :</br>
+{"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 </br>
 ## KIDOZ Banner Adapter
 * Set the following full path in the `Class Name` field: </br>
-(Example: com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter.java)
+com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
+
+* Set your publisherId and  publisherToken as the following in the `Parameter`field  :</br>
+{"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 </br>
-* Please Note: you can change the Kidoz adapter classpath in your project but maker sure the class names you put in the AdMob dashboard correspond to your final adapter location.
 
  
 

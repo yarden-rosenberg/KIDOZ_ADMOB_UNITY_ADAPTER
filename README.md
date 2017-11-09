@@ -51,8 +51,6 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
 </br>
 
  
-
-</br> 
 License
 --------
 

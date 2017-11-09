@@ -35,7 +35,7 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationInterstitialAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field  :</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
-</br>
+
 
 ## KIDOZ Rewarded Video Adapter
 * Set the following full path in the `Class Name` field: </br>
@@ -44,6 +44,8 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationRewardedAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field:</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
+
+
 ## KIDOZ Banner Adapter
 * Set the following full path in the `Class Name` field: </br>
 com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
@@ -51,6 +53,7 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field :</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
+ 
  
 License
 --------

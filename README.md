@@ -31,7 +31,7 @@ Download the KidozAdMobUnity.unitypackage and import it into your project
 * Set the following full path in the `Class Name` field: </br>
 com.kidoz.mediation.admob.adapters.KidozAdMobMediationInterstitialAdapter
 
-* Set your publisherId and  publisherToken as the following in the `Parameter`field  :</br>
+* Set your publisherId and  publisherToken as the following in the `Parameter` field  :</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
 </br>
@@ -40,14 +40,14 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationInterstitialAdapter
 * Set the following full path in the `Class Name` field: </br>
 com.kidoz.mediation.admob.adapters.KidozAdMobMediationRewardedAdapter
 
-* Set your publisherId and  publisherToken as the following in the `Parameter`field:</br>
+* Set your publisherId and  publisherToken as the following in the `Parameter` field:</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
 ## KIDOZ Banner Adapter
 * Set the following full path in the `Class Name` field: </br>
 com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
 
-* Set your publisherId and  publisherToken as the following in the `Parameter`field :</br>
+* Set your publisherId and  publisherToken as the following in the `Parameter` field :</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
  

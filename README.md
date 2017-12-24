@@ -20,6 +20,10 @@ Download the KidozAdMobUnity.unitypackage and import it into your project
 
 3.3. The plugin itself consists of the Kidoz SDK and Kidoz AdMob adaptor. 
 
+    Please note - Currently Admob mediation is not available for Apps opt-in to Designed For Families program. Google should add this support by February-March 2018.
+    Till then, you can integrate KIDOZ ads directly to your apps.
+    
+
 </br>
 
 **Integration Steps:**
@@ -55,6 +59,9 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
 
  
  
+ 
+
+ 
 License
 --------
 
@@ -72,5 +79,3 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
-com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
-com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter

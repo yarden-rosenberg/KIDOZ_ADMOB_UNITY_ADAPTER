@@ -24,7 +24,7 @@ public class SampleCode : MonoBehaviour
 		#if UNITY_ANDROID
 		string appId = "ca-app-pub-5967470543517808~3214489975";
 		#elif UNITY_IPHONE
-        string appId = "";
+		string appId = "ca-app-pub-5967470543517808~1065161391";
 		#else
         string appId = "unexpected_platform";
 		#endif
@@ -40,17 +40,10 @@ public class SampleCode : MonoBehaviour
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
 
-        // Get singleton reward based video ad reference.
-        this.rewardBasedVideo = RewardBasedVideoAd.Instance;
-
-        // RewardBasedVideoAd is a singleton, so handlers should only be registered once.
-        this.rewardBasedVideo.OnAdLoaded += this.HandleRewardBasedVideoLoaded;
-        this.rewardBasedVideo.OnAdFailedToLoad += this.HandleRewardBasedVideoFailedToLoad;
-        this.rewardBasedVideo.OnAdOpening += this.HandleRewardBasedVideoOpened;
-        this.rewardBasedVideo.OnAdStarted += this.HandleRewardBasedVideoStarted;
-        this.rewardBasedVideo.OnAdRewarded += this.HandleRewardBasedVideoRewarded;
-        this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
-        this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
+		InitBanner();
+		InitInterstitial();
+		InitIReward();
+       
     }
 
 
@@ -96,6 +89,7 @@ public class SampleCode : MonoBehaviour
 		myStyle.fontSize = (int)(12 * factor);
 		myStyle.normal.textColor = Color.yellow;
 
+	
 
 		//Add buttons
 		if (GUI.Button (new Rect (width, btnHeight, width, height), "Request Banner",myStyle)) {
@@ -148,74 +142,93 @@ public class SampleCode : MonoBehaviour
     }
 
 	
-
-
-    private void RequestBanner()
-    {
-        // These ad units are configured to always serve test ads.
+	private void InitBanner(){
+		// These ad units are configured to always serve test ads.
 		#if UNITY_EDITOR
-        string adUnitId = "unused";
+		string adUnitId = "unused";
 		#elif UNITY_ANDROID
 		string adUnitId = "ca-app-pub-5967470543517808/9432160371";
 		#elif UNITY_IPHONE
-        string adUnitId = "";
+		string adUnitId = "ca-app-pub-5967470543517808/7349947267";
 		#else
-        string adUnitId = "unexpected_platform";
+		string adUnitId = "unexpected_platform";
 		#endif
+		
+		// Clean up banner ad before creating a new one.
+		if (this.bannerView != null)
+		{
+			this.bannerView.Destroy();
+		}
+		
+		// Create a 320x50 banner at the top of the screen.
+		this.bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Top);
+		
+		// Register for ad events.
+		this.bannerView.OnAdLoaded += this.HandleAdLoaded;
+		this.bannerView.OnAdFailedToLoad += this.HandleAdFailedToLoad;
+		this.bannerView.OnAdOpening += this.HandleAdOpened;
+		this.bannerView.OnAdClosed += this.HandleAdClosed;
+		this.bannerView.OnAdLeavingApplication += this.HandleAdLeftApplication;
+	
+	}
 
-        // Clean up banner ad before creating a new one.
-        if (this.bannerView != null)
-        {
-            this.bannerView.Destroy();
-        }
-
-        // Create a 320x50 banner at the top of the screen.
-        this.bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Top);
-
-        // Register for ad events.
-        this.bannerView.OnAdLoaded += this.HandleAdLoaded;
-        this.bannerView.OnAdFailedToLoad += this.HandleAdFailedToLoad;
-        this.bannerView.OnAdOpening += this.HandleAdOpened;
-        this.bannerView.OnAdClosed += this.HandleAdClosed;
-        this.bannerView.OnAdLeavingApplication += this.HandleAdLeftApplication;
-
-        // Load a banner ad.
+    private void RequestBanner()
+    {
+		// Load a banner ad.
         this.bannerView.LoadAd(this.CreateAdRequest());
     }
 
+	private void InitInterstitial()
+	{
+		// These ad units are configured to always serve test ads.
+		#if UNITY_EDITOR
+		string adUnitId = "unused";
+		#elif UNITY_ANDROID
+		string adUnitId = "ca-app-pub-5967470543517808/1318954375";
+		#elif UNITY_IPHONE
+		string adUnitId = "ca-app-pub-5967470543517808/9897640434";
+		#else
+		string adUnitId = "unexpected_platform";
+		#endif
+		
+		// Clean up interstitial ad before creating a new one.
+		if (this.interstitial != null)
+		{
+			this.interstitial.Destroy();
+		}
+		
+		// Create an interstitial.
+		this.interstitial = new InterstitialAd(adUnitId);
+		
+		// Register for ad events.
+		this.interstitial.OnAdLoaded += this.HandleInterstitialLoaded;
+		this.interstitial.OnAdFailedToLoad += this.HandleInterstitialFailedToLoad;
+		this.interstitial.OnAdOpening += this.HandleInterstitialOpened;
+		this.interstitial.OnAdClosed += this.HandleInterstitialClosed;
+		this.interstitial.OnAdLeavingApplication += this.HandleInterstitialLeftApplication;
+	}
+
+
     private void RequestInterstitial()
     {
-        // These ad units are configured to always serve test ads.
-	#if UNITY_EDITOR
-        string adUnitId = "unused";
-	#elif UNITY_ANDROID
-		string adUnitId = "ca-app-pub-5967470543517808/1318954375";
-	#elif UNITY_IPHONE
-        string adUnitId = "";
-	#else
-        string adUnitId = "unexpected_platform";
-	#endif
-
-        // Clean up interstitial ad before creating a new one.
-        if (this.interstitial != null)
-        {
-            this.interstitial.Destroy();
-        }
-
-        // Create an interstitial.
-        this.interstitial = new InterstitialAd(adUnitId);
-
-        // Register for ad events.
-        this.interstitial.OnAdLoaded += this.HandleInterstitialLoaded;
-        this.interstitial.OnAdFailedToLoad += this.HandleInterstitialFailedToLoad;
-        this.interstitial.OnAdOpening += this.HandleInterstitialOpened;
-        this.interstitial.OnAdClosed += this.HandleInterstitialClosed;
-        this.interstitial.OnAdLeavingApplication += this.HandleInterstitialLeftApplication;
-
-        // Load an interstitial ad.
+      // Load an interstitial ad.
         this.interstitial.LoadAd(this.CreateAdRequest());
     }
 
+	private void InitIReward()
+	{
+		// Get singleton reward based video ad reference.
+		this.rewardBasedVideo = RewardBasedVideoAd.Instance;
+	
+		// RewardBasedVideoAd is a singleton, so handlers should only be registered once.
+		this.rewardBasedVideo.OnAdLoaded += this.HandleRewardBasedVideoLoaded;
+		this.rewardBasedVideo.OnAdFailedToLoad += this.HandleRewardBasedVideoFailedToLoad;
+		this.rewardBasedVideo.OnAdOpening += this.HandleRewardBasedVideoOpened;
+		this.rewardBasedVideo.OnAdStarted += this.HandleRewardBasedVideoStarted;
+		this.rewardBasedVideo.OnAdRewarded += this.HandleRewardBasedVideoRewarded;
+		this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
+		this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
+	}
 
     private void RequestRewardBasedVideo()
     {
@@ -224,7 +237,7 @@ public class SampleCode : MonoBehaviour
 	#elif UNITY_ANDROID
 		string adUnitId = "ca-app-pub-5967470543517808/9701675577";
 	#elif UNITY_IPHONE
-        string adUnitId = "";
+		string adUnitId = "ca-app-pub-5967470543517808/7581935456";
 	#else
         string adUnitId = "unexpected_platform";
 	#endif

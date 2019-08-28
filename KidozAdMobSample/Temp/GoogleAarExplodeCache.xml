@@ -1,7 +1,7 @@
 <aars>
   <explodeData>
     <aar>play-services-ads-11.2.2</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/play-services-ads-11.2.2.aar</path>
@@ -12,7 +12,7 @@
   </explodeData>
   <explodeData>
     <aar>play-services-ads-lite-11.2.2</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/play-services-ads-lite-11.2.2.aar</path>
@@ -23,7 +23,7 @@
   </explodeData>
   <explodeData>
     <aar>play-services-basement-11.2.2</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/play-services-basement-11.2.2.aar</path>
@@ -34,7 +34,7 @@
   </explodeData>
   <explodeData>
     <aar>play-services-gass-11.2.2</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/play-services-gass-11.2.2.aar</path>
@@ -56,7 +56,7 @@
   </explodeData>
   <explodeData>
     <aar>support-compat-25.2.0</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/support-compat-25.2.0.aar</path>
@@ -67,7 +67,7 @@
   </explodeData>
   <explodeData>
     <aar>support-core-ui-25.2.0</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/support-core-ui-25.2.0.aar</path>
@@ -78,7 +78,7 @@
   </explodeData>
   <explodeData>
     <aar>support-core-utils-25.2.0</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/support-core-utils-25.2.0.aar</path>
@@ -89,7 +89,7 @@
   </explodeData>
   <explodeData>
     <aar>support-fragment-25.2.0</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/support-fragment-25.2.0.aar</path>
@@ -100,7 +100,7 @@
   </explodeData>
   <explodeData>
     <aar>support-media-compat-25.2.0</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/support-media-compat-25.2.0.aar</path>
@@ -111,7 +111,7 @@
   </explodeData>
   <explodeData>
     <aar>support-v4-25.2.0</aar>
-    <modificationTime>2017-11-08T10:27:24.0000000+02:00</modificationTime>
+    <modificationTime>2019-07-31T12:30:59.0000000+03:00</modificationTime>
     <explode>false</explode>
     <bundleId>com.kidoz.unity.admob</bundleId>
     <path>Assets/Plugins/Android/support-v4-25.2.0.aar</path>

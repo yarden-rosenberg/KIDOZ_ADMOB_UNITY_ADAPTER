@@ -95,10 +95,9 @@
      <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\RewardBasedVideoAdClient.cs" />
      <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\Utils.cs" />
      <Compile Include="Assets\SampleCode.cs" />
-     <None Include="Assets\Plugins\Android\KidozSdk\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\KidozSDK\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
-     <None Include="Assets\Plugins\Android\KidozSdk\proguard-project.txt" />
      <None Include="Assets\GoogleMobileAds\Editor\GoogleMobileAdsDependencies.xml" />
      <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.59.0.txt" />
  <Reference Include="UnityEngine.UI">

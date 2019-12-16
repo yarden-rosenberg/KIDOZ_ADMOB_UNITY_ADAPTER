@@ -35,6 +35,20 @@
                                              adUnitID:(NSString *)adUnitID
                                      customAdPosition:(CGPoint)customAdPosition;
 
+/// Initializes an adaptive GADUBanner, positioned at either the top or bottom of the screen.
+- (id)initWithAdaptiveBannerSizeAndBannerClientReference:(GADUTypeBannerClientRef *)bannerClient
+                                               adUnitID:(NSString *)adUnitID
+                                                  width:(NSInteger)width
+                                            orientation:(GADUBannerOrientation)orientation
+                                             adPosition:(GADAdPosition)adPosition;
+
+/// Initializes an adaptive GADUBanner with a custom position at given point from top left.
+- (id)initWithAdaptiveBannerSizeAndBannerClientReference:(GADUTypeBannerClientRef *)bannerClient
+                                                adUnitID:(NSString *)adUnitID
+                                                   width:(NSInteger)width
+                                             orientation:(GADUBannerOrientation)orientation
+                                        customAdPosition:(CGPoint)customAdPosition;
+
 /// A reference to the Unity banner client.
 @property(nonatomic, assign) GADUTypeBannerClientRef *bannerClient;
 
@@ -59,6 +73,12 @@
 // Returns the mediation adapter class name.
 @property(nonatomic, readonly, copy) NSString *mediationAdapterClassName;
 
+// Returns the height of the banner view in pixels.
+@property(nonatomic, readonly) CGFloat heightInPixels;
+
+// Returns the width of the banner view in pixels.
+@property(nonatomic, readonly) CGFloat widthInPixels;
+
 /// Makes an ad request. Additional targeting options can be supplied with a request object.
 - (void)loadRequest:(GADRequest *)request;
 
@@ -70,5 +90,11 @@
 
 /// Removes the GADBannerView from the view hierarchy.
 - (void)removeBannerView;
+
+/// Set the GADBannerView's position on screen using a standard position.
+- (void)setAdPosition:(GADAdPosition)adPosition;
+
+/// Set the GADBannerView's position on screen using a custom position.
+- (void)setCustomAdPosition:(CGPoint)customPosition;
 
 @end

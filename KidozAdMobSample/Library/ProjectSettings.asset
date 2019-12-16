@@ -141,7 +141,8 @@ PlayerSettings:
   targetPixelDensity: 200
   resolutionScalingMode: 0
   applicationIdentifier:
-    Android: com.kidoz.unity.admob
+    Android: com.kidoz.unity.admob.android
+    iOS: com.kidoz.unity.admob.ios
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 17

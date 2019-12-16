@@ -8,7 +8,7 @@ public class SampleCode : MonoBehaviour
 {
     private BannerView bannerView;
     private InterstitialAd interstitial;
-    private RewardBasedVideoAd rewardBasedVideo;
+	private RewardedAd rewardedAd;
     private float deltaTime = 0.0f;
 
 	string toastString;
@@ -38,12 +38,7 @@ public class SampleCode : MonoBehaviour
 
 
         // Initialize the Google Mobile Ads SDK.
-        MobileAds.Initialize(appId);
-
-		InitBanner();
-		InitInterstitial();
-		InitIReward();
-       
+        //MobileAds.Initialize(appId);
     }
 
 
@@ -56,10 +51,11 @@ public class SampleCode : MonoBehaviour
 
 	
 	public void showToastOnUiThread(string toastString){
-		this.toastString = toastString;
-		currentActivity.Call("runOnUiThread", new AndroidJavaRunnable(showToast));
+		if (Application.platform == RuntimePlatform.Android) {
+			this.toastString = toastString;
+			currentActivity.Call ("runOnUiThread", new AndroidJavaRunnable (showToast));
 		}
-
+	}
 
     public void Update()
     {
@@ -123,27 +119,53 @@ public class SampleCode : MonoBehaviour
 		btnHeight += height;
 
 		if (GUI.Button (new Rect (width, btnHeight, width, height), "Request Rewarded Video",myStyle)) {
-		    this.RequestRewardBasedVideo();
+			this.RequestRewarded();
 		}
 
 		btnHeight += height;
 
 		if (GUI.Button (new Rect (width, btnHeight, width, height), "Show Rewarded Video",myStyle)) {
-		    this.ShowRewardBasedVideo();
+			this.ShowRewardedAd();
 		}
       
     }
 
     // Returns an ad request with custom ad targeting.
 
+	public void RequestRewarded()
+	{
+		// These ad units are configured to always serve test ads.
+		#if UNITY_EDITOR
+		string adUnitId = "unused";
+		#elif UNITY_ANDROID
+		string adUnitId = "ca-app-pub-5967470543517808/9701675577";
+		#elif UNITY_IPHONE
+		string adUnitId = "ca-app-pub-5967470543517808/7581935456";
+		#else
+		string adUnitId = "unexpected_platform";
+		#endif
+		
+		// Create new rewarded ad instance.
+		this.rewardedAd = new RewardedAd(adUnitId);
+		this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+		this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+		this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+		this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+		this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+		this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+		this.rewardedAd.LoadAd(this.CreateAdRequest());
+	
+	}
+
+
     private AdRequest CreateAdRequest()
     {
 		return new AdRequest.Builder().Build();
     }
 
-	
-	private void InitBanner(){
-		// These ad units are configured to always serve test ads.
+
+    private void RequestBanner()
+    {
 		#if UNITY_EDITOR
 		string adUnitId = "unused";
 		#elif UNITY_ANDROID
@@ -169,16 +191,10 @@ public class SampleCode : MonoBehaviour
 		this.bannerView.OnAdOpening += this.HandleAdOpened;
 		this.bannerView.OnAdClosed += this.HandleAdClosed;
 		this.bannerView.OnAdLeavingApplication += this.HandleAdLeftApplication;
-	
-	}
-
-    private void RequestBanner()
-    {
-		// Load a banner ad.
         this.bannerView.LoadAd(this.CreateAdRequest());
     }
 
-	private void InitInterstitial()
+	private void RequestInterstitial()
 	{
 		// These ad units are configured to always serve test ads.
 		#if UNITY_EDITOR
@@ -206,44 +222,10 @@ public class SampleCode : MonoBehaviour
 		this.interstitial.OnAdOpening += this.HandleInterstitialOpened;
 		this.interstitial.OnAdClosed += this.HandleInterstitialClosed;
 		this.interstitial.OnAdLeavingApplication += this.HandleInterstitialLeftApplication;
+		this.interstitial.LoadAd(this.CreateAdRequest());
+
 	}
 
-
-    private void RequestInterstitial()
-    {
-      // Load an interstitial ad.
-        this.interstitial.LoadAd(this.CreateAdRequest());
-    }
-
-	private void InitIReward()
-	{
-		// Get singleton reward based video ad reference.
-		this.rewardBasedVideo = RewardBasedVideoAd.Instance;
-	
-		// RewardBasedVideoAd is a singleton, so handlers should only be registered once.
-		this.rewardBasedVideo.OnAdLoaded += this.HandleRewardBasedVideoLoaded;
-		this.rewardBasedVideo.OnAdFailedToLoad += this.HandleRewardBasedVideoFailedToLoad;
-		this.rewardBasedVideo.OnAdOpening += this.HandleRewardBasedVideoOpened;
-		this.rewardBasedVideo.OnAdStarted += this.HandleRewardBasedVideoStarted;
-		this.rewardBasedVideo.OnAdRewarded += this.HandleRewardBasedVideoRewarded;
-		this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
-		this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
-	}
-
-    private void RequestRewardBasedVideo()
-    {
-	#if UNITY_EDITOR
-        string adUnitId = "unused";
-	#elif UNITY_ANDROID
-		string adUnitId = "ca-app-pub-5967470543517808/9701675577";
-	#elif UNITY_IPHONE
-		string adUnitId = "ca-app-pub-5967470543517808/7581935456";
-	#else
-        string adUnitId = "unexpected_platform";
-	#endif
-
-        this.rewardBasedVideo.LoadAd(this.CreateAdRequest(), adUnitId);
-    }
 
     private void ShowInterstitial()
     {
@@ -257,18 +239,19 @@ public class SampleCode : MonoBehaviour
         }
     }
 
-    private void ShowRewardBasedVideo()
-    {
-        if (this.rewardBasedVideo.IsLoaded())
-        {
-            this.rewardBasedVideo.Show();
-        }
-        else
-        {
-            MonoBehaviour.print("Reward based video ad is not ready yet");
-        }
-    }
+	private void ShowRewardedAd()
+	{
+		if (this.rewardedAd.IsLoaded())
+		{
+			this.rewardedAd.Show();
+		}
+		else
+		{
+			MonoBehaviour.print("Reward video ad is not ready yet");
+		}
+	}
 
+ 
     #region Banner callback handlers
 
     public void HandleAdLoaded(object sender, EventArgs args)
@@ -340,55 +323,53 @@ public class SampleCode : MonoBehaviour
 
     #endregion
 
-    #region RewardBasedVideo callback handlers
+  
 
-    public void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
-    {
-		this.showToastOnUiThread("HandleRewardBasedVideoLoaded event received");
-        MonoBehaviour.print("HandleRewardBasedVideoLoaded event received");
-    }
 
-    public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
-    {
-		this.showToastOnUiThread("HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
-        MonoBehaviour.print(
-            "HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
-    }
-
-    public void HandleRewardBasedVideoOpened(object sender, EventArgs args)
-    {
-		this.showToastOnUiThread("HandleRewardBasedVideoOpened event received");
-        MonoBehaviour.print("HandleRewardBasedVideoOpened event received");
-    }
-
-    public void HandleRewardBasedVideoStarted(object sender, EventArgs args)
-    {
-		this.showToastOnUiThread("HandleRewardBasedVideoStarted event received");
-        MonoBehaviour.print("HandleRewardBasedVideoStarted event received");
-    }
-
-    public void HandleRewardBasedVideoClosed(object sender, EventArgs args)
-    {
-		this.showToastOnUiThread("HandleRewardBasedVideoClosed event received");
-        MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
-    }
-
-    public void HandleRewardBasedVideoRewarded(object sender, Reward args)
-    {
-        string type = args.Type;
-        double amount = args.Amount;
-
-		this.showToastOnUiThread("HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
-
-        MonoBehaviour.print(
-            "HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
-    }
-
-    public void HandleRewardBasedVideoLeftApplication(object sender, EventArgs args)
-    {
-		this.showToastOnUiThread("HandleRewardBasedVideoLeftApplication event received");
-        MonoBehaviour.print("HandleRewardBasedVideoLeftApplication event received");
-    }
-
-    #endregion
+	#region RewardedAd callback handlers
+	
+	public void HandleRewardedAdLoaded(object sender, EventArgs args)
+	{
+		this.showToastOnUiThread("HandleRewardedAdLoaded event received");
+		MonoBehaviour.print("HandleRewardedAdLoaded event received");
+	}
+	
+	public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
+	{
+		this.showToastOnUiThread("HHandleRewardedAdFailedToLoad event received with message: " + args.Message);
+		MonoBehaviour.print(
+			"HandleRewardedAdFailedToLoad event received with message: " + args.Message);
+	}
+	
+	public void HandleRewardedAdOpening(object sender, EventArgs args)
+	{
+		this.showToastOnUiThread("HandleRewardedAdOpening event received");
+		MonoBehaviour.print("HandleRewardedAdOpening event received");
+	}
+	
+	public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
+	{
+		this.showToastOnUiThread("HandleRewardedAdFailedToShow event received with message: " + args.Message);
+		MonoBehaviour.print(
+			"HandleRewardedAdFailedToShow event received with message: " + args.Message);
+	}
+	
+	public void HandleRewardedAdClosed(object sender, EventArgs args)
+	{
+		this.showToastOnUiThread("HHandleRewardedAdClosed event received");
+		MonoBehaviour.print("HandleRewardedAdClosed event received");
+	}
+	
+	public void HandleUserEarnedReward(object sender, Reward args)
+	{
+		string type = args.Type;
+		double amount = args.Amount;
+		this.showToastOnUiThread("HandleRewardedAdRewarded event received for "
+		                         + amount.ToString() + " " + type);
+		MonoBehaviour.print(
+			"HandleRewardedAdRewarded event received for "
+			+ amount.ToString() + " " + type);
+	}
+	
+	#endregion
 }

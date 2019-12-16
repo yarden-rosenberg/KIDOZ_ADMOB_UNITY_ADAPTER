@@ -76,6 +76,30 @@
                             customAdPosition:customAdPosition];
 }
 
+- (id)initWithAdaptiveBannerSizeAndBannerClientReference:(GADUTypeBannerClientRef *)bannerClient
+                                                adUnitID:(NSString *)adUnitID
+                                                   width:(NSInteger)width
+                                             orientation:(GADUBannerOrientation)orientation
+                                              adPosition:(GADAdPosition)adPosition {
+  return [self initWithBannerClientReference:bannerClient
+                                    adUnitID:adUnitID
+                                      adSize:[GADUPluginUtil adaptiveAdSizeForWidth:(CGFloat)width
+                                                                        orientation:orientation]
+                                  adPosition:adPosition];
+}
+
+- (id)initWithAdaptiveBannerSizeAndBannerClientReference:(GADUTypeBannerClientRef *)bannerClient
+                                                adUnitID:(NSString *)adUnitID
+                                                   width:(NSInteger)width
+                                             orientation:(GADUBannerOrientation)orientation
+                                        customAdPosition:(CGPoint)customAdPosition {
+  return [self initWithBannerClientReference:bannerClient
+                                    adUnitID:adUnitID
+                                      adSize:[GADUPluginUtil adaptiveAdSizeForWidth:(CGFloat)width
+                                                                        orientation:orientation]
+                            customAdPosition:customAdPosition];
+}
+
 - (id)initWithBannerClientReference:(GADUTypeBannerClientRef *)bannerClient
                            adUnitID:(NSString *)adUnitID
                              adSize:(GADAdSize)size
@@ -84,7 +108,7 @@
   if (self) {
     _bannerClient = bannerClient;
     _adPosition = adPosition;
-    _bannerView = [[GADBannerView alloc] initWithAdSize:size];
+    _bannerView = [[GADBannerView alloc] initWithAdSize:[GADUPluginUtil safeAdSizeForAdSize:size]];
     _bannerView.adUnitID = adUnitID;
     _bannerView.delegate = self;
     _bannerView.rootViewController = [GADUPluginUtil unityGLViewController];
@@ -101,7 +125,7 @@
     _bannerClient = bannerClient;
     _customAdPosition = customAdPosition;
     _adPosition = kGADAdPositionCustom;
-    _bannerView = [[GADBannerView alloc] initWithAdSize:size];
+    _bannerView = [[GADBannerView alloc] initWithAdSize:[GADUPluginUtil safeAdSizeForAdSize:size]];
     _bannerView.adUnitID = adUnitID;
     _bannerView.delegate = self;
     _bannerView.rootViewController = [GADUPluginUtil unityGLViewController];
@@ -149,6 +173,38 @@
   return [self.bannerView adNetworkClassName];
 }
 
+- (CGFloat)heightInPixels {
+  return CGRectGetHeight(CGRectStandardize(self.bannerView.frame)) * [UIScreen mainScreen].scale;
+}
+
+- (CGFloat)widthInPixels {
+  return CGRectGetWidth(CGRectStandardize(self.bannerView.frame)) * [UIScreen mainScreen].scale;
+}
+
+- (void)setAdPosition:(GADAdPosition)adPosition {
+  _adPosition = adPosition;
+  [self positionBannerView];
+}
+
+- (void)setCustomAdPosition:(CGPoint)customPosition {
+  _customAdPosition = customPosition;
+  _adPosition = kGADAdPositionCustom;
+  [self positionBannerView];
+}
+
+- (void)positionBannerView {
+  /// Align the bannerView in the Unity view bounds.
+  UIView *unityView = [GADUPluginUtil unityGLViewController].view;
+
+  if (self.adPosition != kGADAdPositionCustom) {
+    [GADUPluginUtil positionView:self.bannerView inParentView:unityView adPosition:self.adPosition];
+  } else {
+    [GADUPluginUtil positionView:self.bannerView
+                    inParentView:unityView
+                  customPosition:self.customAdPosition];
+  }
+}
+
 #pragma mark GADBannerViewDelegate implementation
 
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
@@ -161,15 +217,7 @@
   /// Align the bannerView in the Unity view bounds.
   UIView *unityView = [GADUPluginUtil unityGLViewController].view;
 
-  if (self.adPosition != kGADAdPositionCustom) {
-    [GADUPluginUtil positionView:self.bannerView
-                    inParentView:unityView
-                      adPosition:self.adPosition];
-  } else {
-    [GADUPluginUtil positionView:self.bannerView
-                    inParentView:unityView
-                  customPosition:self.customAdPosition];
-  }
+  [self positionBannerView];
 
   [unityView addSubview:self.bannerView];
 

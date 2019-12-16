@@ -58,8 +58,13 @@ com.kidoz.mediation.admob.adapters.KidozAdMobMediationRewardedAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field:</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
-
-
+```
+  Note: for Unity plugin lower than 3.16.0 
+    Set the full path in the Class Name field:  
+    com.kidoz.mediation.admob.adapters.KidozAdMobMediationLegacyRewardedAdapter
+   ``` 
+  
+  
 ### KIDOZ Banner Adapter
 * Set the following full path in the `Class Name` field: </br>
 com.kidoz.mediation.admob.adapters.KidozAdMobMediationBannerAdapter
@@ -84,6 +89,13 @@ KidozAdMobMediationRewardedAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field:</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
+```
+  Note: for Unity plugin lower than 3.16.0 
+    Set the full path in the Class Name field:  
+    KidozAdMobMediationRewardedLegacyAdapter
+   ``` 
+
+
 
 
 ### KIDOZ Banner Adapter
@@ -93,7 +105,8 @@ KidozAdMobMediationBannerAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field :</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
- 
+```Note for Unity plugin lower than 3.16.0 ```
+
  
 
  

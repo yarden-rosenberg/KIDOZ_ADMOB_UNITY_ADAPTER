@@ -1,7 +1,7 @@
 
 
 # KIDOZ_ADMOB_UNITY_ADAPTER
-Kidoz AdMob mediation adapter for Unity
+Kidoz AdMob mediation adapter for Unity  
 </br>
 
 **Prerequisits:**

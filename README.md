@@ -24,7 +24,7 @@ Download the KidozAdMobUnity.unitypackage and import it into your project
 - Kidoz Android SDK v0.8.8.4  
 - Kidoz iOS SDK v1.3.4
 - Kidoz Android AdMob Adapter v1.6
-- Kidoz iOS AdMob Adapter v1.5
+- Kidoz iOS AdMob Adapter v1.6
 ```css
 *** Please note - The support of Admob mediation for Apps that opt-in to Designed For Families program, should be checked with Google Admob mediation team. 
 However, KIDOZ ads can be integrated directly to your apps.

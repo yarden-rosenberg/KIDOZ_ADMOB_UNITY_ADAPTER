@@ -1,5 +1,6 @@
 
 
+
 # KIDOZ_ADMOB_UNITY_ADAPTER
 Kidoz AdMob mediation adapter for Unity  
 </br>
@@ -20,11 +21,16 @@ Download the KidozAdMobUnity.unitypackage and import it into your project
 
 3.3. The plugin itself consists of the Kidoz SDK and Kidoz AdMob adaptor (Android And iOS). 
 3.4. Built and tested with:
- - Google Mobile Ads Unity Plugin v4.1.0
+ - Google Mobile Ads Unity Plugin v5.1.0
 - Kidoz Android SDK v0.8.8.7  
-- Kidoz iOS SDK v1.3.4
+- Kidoz iOS SDK v1.3.5
 - Kidoz Android AdMob Adapter v1.6
 - Kidoz iOS AdMob Adapter v1.6
+
+***This SDK version was verified not to contain the Advertiser Identifier (IDFA) as required by Apple App Store regulation for apps of Kids category.***
+
+Note: Build with Unity 2017.4.39f1 Version
+
 ```css
 *** Please note - The support of Admob mediation for Apps that opt-in to Designed For Families program, should be checked with Google Admob mediation team. 
 However, KIDOZ ads can be integrated directly to your apps.

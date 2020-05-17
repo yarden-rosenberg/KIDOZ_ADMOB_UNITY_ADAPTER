@@ -1,7 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
+using System.Collections;
+using System.Collections.Generic;
 
 // Example script showing how to invoke the Google Mobile Ads Unity plugin.
 public class SampleCode : MonoBehaviour
@@ -10,12 +14,16 @@ public class SampleCode : MonoBehaviour
     private InterstitialAd interstitial;
 	private RewardedAd rewardedAd;
     private float deltaTime = 0.0f;
+	private String text;
+	public int maxLines = 10;
+
+	private List<string> Eventlog = new List<string>();
 
 	string toastString;
 	AndroidJavaObject currentActivity;
 	AndroidJavaClass UnityPlayer;
 	AndroidJavaObject context;
-
+	 
 
     
     public void Start()
@@ -28,7 +36,6 @@ public class SampleCode : MonoBehaviour
 		#else
         string appId = "unexpected_platform";
 		#endif
-
 	
 	if (Application.platform == RuntimePlatform.Android){
 		UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -96,6 +103,8 @@ public class SampleCode : MonoBehaviour
 
 		if (GUI.Button (new Rect (width, btnHeight, width, height), "Destroy Banner",myStyle)) {
 			this.bannerView.Destroy();
+			AddEvent ("banner Destroy");
+
 		}
 
 		btnHeight += height;
@@ -114,6 +123,7 @@ public class SampleCode : MonoBehaviour
 
 		if (GUI.Button (new Rect (width, btnHeight, width, height), "Destroy Interstitial",myStyle)) {
 		   this.interstitial.Destroy();
+			AddEvent ("Interstitial Destroy");
 		}
 
 		btnHeight += height;
@@ -127,8 +137,30 @@ public class SampleCode : MonoBehaviour
 		if (GUI.Button (new Rect (width, btnHeight, width, height), "Show Rewarded Video",myStyle)) {
 			this.ShowRewardedAd();
 		}
-      
+
+		btnHeight += height;
+
+		//myStyle.normal.textColor = Color.white;
+		//GUI.Label(new Rect(width, btnHeight, width, height*10), text, myStyle);
+		GUI.Label(new Rect(0, btnHeight, Screen.width, Screen.height - btnHeight ), text, GUI.skin.textArea);
+
     }
+
+	public void AddEvent(string eventString)
+	{
+		Eventlog.Add(System.DateTime.Now + " - " + eventString);
+		
+		if (Eventlog.Count >= maxLines)
+			Eventlog.RemoveAt(0);
+		
+		text = "";
+		
+		foreach (string logEvent in Eventlog)
+		{
+			text += logEvent;
+			text += "\n";
+		}
+	}
 
     // Returns an ad request with custom ad targeting.
 
@@ -154,6 +186,8 @@ public class SampleCode : MonoBehaviour
 		this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
 		this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
 		this.rewardedAd.LoadAd(this.CreateAdRequest());
+
+		AddEvent ("Request Rewarded");
 	
 	}
 
@@ -192,6 +226,8 @@ public class SampleCode : MonoBehaviour
 		this.bannerView.OnAdClosed += this.HandleAdClosed;
 		this.bannerView.OnAdLeavingApplication += this.HandleAdLeftApplication;
         this.bannerView.LoadAd(this.CreateAdRequest());
+
+		AddEvent ("Request Banner");
     }
 
 	private void RequestInterstitial()
@@ -224,6 +260,7 @@ public class SampleCode : MonoBehaviour
 		this.interstitial.OnAdLeavingApplication += this.HandleInterstitialLeftApplication;
 		this.interstitial.LoadAd(this.CreateAdRequest());
 
+		AddEvent ("RequestInterstitial");
 	}
 
 
@@ -235,8 +272,13 @@ public class SampleCode : MonoBehaviour
         }
         else
         {
+			AddEvent ("Interstitial is not ready yet");
+
             MonoBehaviour.print("Interstitial is not ready yet");
         }
+
+
+		AddEvent ("Show Interstitial");
     }
 
 	private void ShowRewardedAd()
@@ -247,41 +289,48 @@ public class SampleCode : MonoBehaviour
 		}
 		else
 		{
+			AddEvent ("Reward video ad is not ready yet");
 			MonoBehaviour.print("Reward video ad is not ready yet");
 		}
+
+		AddEvent ("Show RewardedAd");
 	}
 
  
     #region Banner callback handlers
 
     public void HandleAdLoaded(object sender, EventArgs args)
-    {
-		this.showToastOnUiThread("HandleAdLoaded event received");
+    {	this.showToastOnUiThread("HandleAdLoaded event received");
         MonoBehaviour.print("HandleAdLoaded event received");
+		AddEvent ("Banner Loaded");
     }
 
     public void HandleAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
 		this.showToastOnUiThread("HandleFailedToReceiveAd event received with message: " + args.Message);
         MonoBehaviour.print("HandleFailedToReceiveAd event received with message: " + args.Message);
+		AddEvent ("Banner Load Failed " + args.Message);
     }
 
     public void HandleAdOpened(object sender, EventArgs args)
     {
 		this.showToastOnUiThread("HandleAdOpened event received");
         MonoBehaviour.print("HandleAdOpened event received");
+		AddEvent ("Banner Opened");
     }
 
     public void HandleAdClosed(object sender, EventArgs args)
     {
 		this.showToastOnUiThread("HandleAdClosed event received");
         MonoBehaviour.print("HandleAdClosed event received");
+		AddEvent ("Banner Closed");
     }
 
     public void HandleAdLeftApplication(object sender, EventArgs args)
     {
 		this.showToastOnUiThread("HandleAdLeftApplication event received");
         MonoBehaviour.print("HandleAdLeftApplication event received");
+		AddEvent ("Banner Left Aplication");
     }
 
     #endregion
@@ -292,6 +341,7 @@ public class SampleCode : MonoBehaviour
     {
 		this.showToastOnUiThread("HandleInterstitialLoaded event received");
         MonoBehaviour.print("HandleInterstitialLoaded event received");
+		AddEvent ("Interstitial Loaded");
     }
 
     public void HandleInterstitialFailedToLoad(object sender, AdFailedToLoadEventArgs args)
@@ -301,24 +351,31 @@ public class SampleCode : MonoBehaviour
 
         MonoBehaviour.print(
             "HandleInterstitialFailedToLoad event received with message: " + args.Message);
+
+		AddEvent ("InterstitialFailedToLoad event received with message: " + args.Message);
+
+
     }
 
     public void HandleInterstitialOpened(object sender, EventArgs args)
     {
 		this.showToastOnUiThread("HandleInterstitialOpened event received");
         MonoBehaviour.print("HandleInterstitialOpened event received");
+		AddEvent ("Interstitial Opened");
     }
 
     public void HandleInterstitialClosed(object sender, EventArgs args)
     {
 		this.showToastOnUiThread("HandleInterstitialClosed event received");
         MonoBehaviour.print("HandleInterstitialClosed event received");
+		AddEvent ("Interstitial Closed");
     }
 
     public void HandleInterstitialLeftApplication(object sender, EventArgs args)
     {
 		this.showToastOnUiThread("HandleInterstitialLeftApplication event received");
         MonoBehaviour.print("HandleInterstitialLeftApplication event received");
+		AddEvent ("Interstitial Left Application");
     }
 
     #endregion
@@ -332,6 +389,8 @@ public class SampleCode : MonoBehaviour
 	{
 		this.showToastOnUiThread("HandleRewardedAdLoaded event received");
 		MonoBehaviour.print("HandleRewardedAdLoaded event received");
+		AddEvent ("Rewarded Loaded");
+
 	}
 	
 	public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
@@ -339,12 +398,16 @@ public class SampleCode : MonoBehaviour
 		this.showToastOnUiThread("HHandleRewardedAdFailedToLoad event received with message: " + args.Message);
 		MonoBehaviour.print(
 			"HandleRewardedAdFailedToLoad event received with message: " + args.Message);
+
+		AddEvent ("RewardedAdFailedToLoad event received with message: " + args.Message);
 	}
 	
 	public void HandleRewardedAdOpening(object sender, EventArgs args)
 	{
 		this.showToastOnUiThread("HandleRewardedAdOpening event received");
 		MonoBehaviour.print("HandleRewardedAdOpening event received");
+		AddEvent ("Rewarded Opening");
+
 	}
 	
 	public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
@@ -352,12 +415,16 @@ public class SampleCode : MonoBehaviour
 		this.showToastOnUiThread("HandleRewardedAdFailedToShow event received with message: " + args.Message);
 		MonoBehaviour.print(
 			"HandleRewardedAdFailedToShow event received with message: " + args.Message);
+
+		AddEvent ("RewardedAdFailedToShow event received with message: " + args.Message);
+
 	}
 	
 	public void HandleRewardedAdClosed(object sender, EventArgs args)
 	{
 		this.showToastOnUiThread("HHandleRewardedAdClosed event received");
 		MonoBehaviour.print("HandleRewardedAdClosed event received");
+		AddEvent ("Rewarded Closed");
 	}
 	
 	public void HandleUserEarnedReward(object sender, Reward args)
@@ -369,7 +436,11 @@ public class SampleCode : MonoBehaviour
 		MonoBehaviour.print(
 			"HandleRewardedAdRewarded event received for "
 			+ amount.ToString() + " " + type);
+
+		AddEvent ("RewardedAdRewarded event received for " + amount.ToString() + " " + type);
+
 	}
-	
+
+
 	#endregion
 }

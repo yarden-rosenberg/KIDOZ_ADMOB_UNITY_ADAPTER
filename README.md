@@ -22,7 +22,7 @@ Download the KidozAdMobUnity.unitypackage and import it into your project
 3.3. The plugin itself consists of the Kidoz SDK and Kidoz AdMob adaptor (Android And iOS). 
 3.4. Built and tested with:
  - Google Mobile Ads Unity Plugin v5.1.0
-- Kidoz Android SDK v0.8.8.7  
+- Kidoz Android SDK v0.8.8.8  
 - Kidoz iOS SDK v1.3.5
 - Kidoz Android AdMob Adapter v1.6
 - Kidoz iOS AdMob Adapter v1.6

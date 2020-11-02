@@ -1,6 +1,6 @@
-Android
+iOS
 PlayerPath?
-/Users/orikam/dev/SDK_GIT/KIDOZ_AdMob_Unity_SDK_Example/KidozAdMobSample/KidozAdMobSample.apk
+/Users/orikam/dev/ios_admob_test_app
 SceneListBegin?
 Assets/MainScene.unity
 SceneListEnd?

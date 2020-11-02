@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{1AB80089-B119-43EA-4271-3150731F769E}|">
-  <MonoDevelop.Ide.ItemProperties.GoogleMobileAds PreferredExecutionTarget="1f87d90c-1365-41c0-80fc-f14bd86b9ea3" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GoogleMobileAds/Api/BannerView.cs">
+  <MonoDevelop.Ide.ItemProperties.GoogleMobileAds PreferredExecutionTarget="33d5c9de-f348-4f95-9850-fe15a7c83a7c" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/SampleCode.cs">
     <Files>
       <File FileName="Assets/GoogleMobileAds/Api/BannerView.cs" Line="22" Column="18" IsPinned="True" />
-      <File FileName="Assets/SampleCode.cs" Line="13" Column="23" />
+      <File FileName="Assets/SampleCode.cs" Line="228" Column="37" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,20 +11,11 @@
           <Node name="KidozAdMobSample" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="GoogleMobileAds" expanded="True">
-                <Node name="Api" expanded="True">
-                  <Node name="BannerView.cs" selected="True" />
-                </Node>
+                <Node name="Api" expanded="True" />
               </Node>
+              <Node name="SampleCode.cs" selected="True" />
             </Node>
           </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="KidozAdMobSample" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>

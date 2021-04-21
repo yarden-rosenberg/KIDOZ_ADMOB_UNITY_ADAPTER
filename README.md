@@ -22,7 +22,7 @@ Download the KidozAdMobUnity.unitypackage and import it into your project
 3.3. The plugin itself consists of the Kidoz SDK and Kidoz AdMob adaptor (Android And iOS). 
 3.4. Built and tested with:
  - Google Mobile Ads Unity Plugin v5.1.0
-- Kidoz Android SDK v8.9.0 
+- Kidoz Android SDK v8.9.1 
 - Kidoz iOS SDK v8.9.0
 - Kidoz Android AdMob Adapter v1.6
 - Kidoz iOS AdMob Adapter v1.6
@@ -111,10 +111,19 @@ KidozAdMobMediationBannerAdapter
 * Set your publisherId and  publisherToken as the following in the `Parameter` field :</br>
 {"AppID":"your_publisher_Id", "Token":"your_publisher_Token"}
 
-```Note for Unity plugin lower than 3.16.0 ```
+
 
  
-
+**Note for Android:**
+```
+If you are using the Minify option in the Player settings please add this to proguard-user.txt file:  
+  
+-keepclasseswithmembers class com.kidoz.sdk.** {*;}  
+-keep @interface org.greenrobot.eventbus.Subscribe  
+-keepclassmembers class * {  
+@org.greenrobot.eventbus.Subscribe <methods>;  
+}
+```
  
 License
 --------

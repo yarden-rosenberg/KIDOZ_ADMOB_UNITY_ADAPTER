@@ -344,13 +344,9 @@
     <None Include="Assets\ExternalDependencyManager\Editor\GoogleRegistries.xml" />
     <None Include="Assets\ExternalDependencyManager\Editor\external-dependency-manager_version-1.2.153_manifest.txt" />
     <None Include="Assets\GoogleMobileAds\Editor\GoogleMobileAdsDependencies.xml" />
-    <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\KidozSDK\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\com.google.android.gms.play-services-ads-lite-19.1.0\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\com.google.android.gms.play-services-ads-lite-19.1.0\R.txt" />
-    <None Include="Assets\Plugins\Android\com.google.android.gms.play-services-ads-lite-19.1.0\proguard.txt" />
-    <None Include="Assets\Plugins\Android\com.google.android.gms.play-services-ads-lite-19.1.0\res\values\values.xml" />
-    <None Include="Assets\Plugins\Android\com.google.android.gms.play-services-ads-lite-19.1.0\third_party_licenses.txt" />
+    <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin.androidlib\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\KidozSDK.androidlib\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\proguard-user.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

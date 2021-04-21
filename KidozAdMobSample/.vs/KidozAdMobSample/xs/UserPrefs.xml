@@ -1,21 +1,10 @@
 ﻿<Properties StartupConfiguration="{1AB80089-B119-43EA-4271-3150731F769E}|">
-  <MonoDevelop.Ide.ItemProperties.GoogleMobileAds PreferredExecutionTarget="e2837d4b-19d2-4f33-b3ae-0cc1643f3925" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/SampleCode.cs">
-    <Files>
-      <File FileName="Assets/GoogleMobileAds/Api/BannerView.cs" Line="22" Column="18" IsPinned="True" />
-      <File FileName="Assets/SampleCode.cs" Line="392" Column="11" />
-    </Files>
+  <MonoDevelop.Ide.ItemProperties.GoogleMobileAds PreferredExecutionTarget="8b5640dc-b719-4ee3-94a1-5935c4a99dce" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="KidozAdMobSample" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="GoogleMobileAds" expanded="True">
-                <Node name="Api" expanded="True" />
-              </Node>
-              <Node name="SampleCode.cs" selected="True" />
-            </Node>
-          </Node>
+          <Node name="KidozAdMobSample" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>

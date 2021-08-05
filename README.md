@@ -16,7 +16,7 @@ Kidoz AdMob mediation adapter for Unity
 ```
 Download the KidozAdMobUnity.unitypackage and import it into your project  
 
-Important: Please make sure you replace the development AdMob app ID with yours app ID!!!
+Important: Please make sure you replace the Kidoz Dev AdMob app ID with your own app ID!!!
 Look [HERE](https://developers.google.com/admob/unity/quick-start#set_your_admob_app_id) for an exact explanation
      
 ```
